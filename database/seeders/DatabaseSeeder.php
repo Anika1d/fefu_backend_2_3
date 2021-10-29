@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\News;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,8 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        News::query()->delete();
-        \App\Models\News::factory(random_int(15,25))->create();
+        (new NewsSeeder)->run();
     }
 }
