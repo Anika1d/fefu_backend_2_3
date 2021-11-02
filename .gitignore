@@ -13,8 +13,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-app/Http/Controllers/NewsController.php
-package.json
-.script
-.properties
-.log
+
