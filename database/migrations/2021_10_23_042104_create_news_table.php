@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateNewsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create("news", function (Blueprint $table) {
