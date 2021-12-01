@@ -26,39 +26,72 @@
         <p>Sent successfully</p>
     @endif
     @if($errors !== null)
-        @foreach($errors as $error)
-            <a class="error">{{$error}}</a><br>
+        @foreach($errors->all() as $error)
+            <p class="error">{{$error}}</p><br>
         @endforeach
     @endif
-    <form method="POST" action="{{route('appeal_rol')}}">
+    <form method="POST" action="{{route('appeal_post_route')}}">
         @csrf
         <div>
             <label>Name</label>
             <label>
-                <input class="bordered" style="background: #acacac" name="name" type="text"
-                       value="{{request()->isMethod('post') ? old('name') : ''}}" maxlength="20" size="20"/>
+                <input  style="background: #acacac" class="bordered" name="name" type="text"
+                        placeholder="Иван" value="{{$errors !== null ? old('name') : ''}}" size="20"/>
             </label>
         </div>
         <div>
+            <label>Surname</label>
+            <label>
+                <input style="background: #acacac" class="bordered" name="surname" type="text"
+                       placeholder="Иванов"   value="{{$errors !== null ? old('surname') : ''}}" size="20"/>
+            </label>
+        </div>
+
+        <div>
+            <label>Patronymic</label>
+            <label>
+                <input  style="background: #acacac" class="bordered" name="patronymic" type="text"
+                        placeholder="Иванович"  value="{{$errors !== null ? old('patronymic') : ''}}" size="20"/>
+            </label>
+        </div>
+
+        <div>
+            <label>Gender</label>
+            <label>
+                <select style="background: #acacac" class="bordered" name="gender">
+                    <option value="0" {{$errors !== null && old('gender') == 0 ? 'selected' : ''}}>Male</option>
+                    <option value="1" {{$errors !== null && old('gender') == 1 ? 'selected' : ''}}>Female</option>
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <label>Age</label>
+            <label>
+                <input  style="background: #acacac" class="bordered" name="age" type="text"
+                        placeholder=">13"     value="{{$errors !== null ? old('age') : ''}}" size="20"/>
+            </label>
+        </div>
+
+        <div>
             <label>Email</label>
             <label>
-                <input class="bordered" style="background: #acacac" name="email" type="email"
-                       value="{{request()->isMethod('post') ? old('email') : ''}}"
-                       maxlength="100" size="20"/>
+                <input style="background: #acacac" class="bordered" name="email" type="text"
+                       placeholder="email@gmail.com"  value="{{$errors !== null ? old('email') : ''}}" size="20"/>
             </label>
         </div>
         <div>
             <label>Phone</label>
             <label>
-                <input class="bordered" style="background: #acacac" name="phone" type="tel"
-            value="{{request()->isMethod('post') ? old('phone') : ''}}" maxlength="11" size="20"/>
+                <input style="background: #acacac"  class="bordered" name="phone" type="text"
+                       placeholder="+7(999) 99-99-999"
+                       value="{{$errors !== null ? old('phone') : ''}}" size="20"/>
             </label>
         </div>
-        <div> <label>Message</label></div>
+        <label>Message</label>
         <div>
             <label>
-                <textarea class="bordered"  style="background: #acacac" name="message"
-                  maxlength="100" rows="5">{{request()->isMethod('post') ? old('message') : ''}}</textarea>
+                <textarea  style="background: #acacac" class="bordered" name="message" rows="5">{{$errors !== null ? old('message') : ''}}</textarea>
             </label>
         </div>
         <input type="submit">
