@@ -23,7 +23,7 @@
 <body>
 <h1>News</h1>
 @foreach($news as $item)
-    <a  style="color:blue" href="{{route('news_rol', ['slug' => $item->slug])}}">
+    <a  style="color:blue" href="{{route('news_get_route', ['slug' => $item->slug])}}">
         {{ $item->title }}</a><br>
     <p>{{$item->published_at}}</p>
     @if(isset($item->description))
