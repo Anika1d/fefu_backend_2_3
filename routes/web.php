@@ -6,7 +6,7 @@ use App\Http\Controllers\AppealController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/news/', [NewsController::class, 'getList'])->name('news_list_rol');
-Route::get('/news/{slug}', [NewsController::class, 'getDetails'])->name('news_rol');
-Route::match(['get','post'],'/appeal', AppealController::class)->name('appeal_rol');
-   
+Route::get('/news/', [NewsController::class, 'getList'])->name('news_list_get_route');
+Route::get('/news/{slug}', [NewsController::class, 'getDetails'])->name('news_get_route');
+Route::get('/appeal', [AppealController::class, 'handleGet'])->name('appeal_get_route');
+Route::post('/appeal', [AppealController::class, 'handlePost'])->name('appeal_post_route');
