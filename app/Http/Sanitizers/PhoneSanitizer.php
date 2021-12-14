@@ -4,7 +4,7 @@ namespace App\Http\Sanitizers;
 
 class PhoneSanitizer
 {
-    public static function sanitize(string $value): ?string
+    public static function sanitize(?string $value): ?string
     {
         if ($value === null)
             return null;
