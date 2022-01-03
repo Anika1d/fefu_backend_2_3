@@ -19,7 +19,10 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
+    @includeWhen(session('popup'),'popup')
+
 </head>
+
 <body>
 <a  style="color:blue" href="{{route('news_list_get_route')}}">Back to news</a>
 <h1>{{$item->title}}</h1>

@@ -6,7 +6,7 @@ use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AppealPostRequest extends FormRequest
+class   AppealPostRequest extends FormRequest
 {
     public function authorize()
     {
