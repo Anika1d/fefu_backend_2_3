@@ -19,6 +19,7 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
+    @includeWhen(session('popup'),'popup')
 </head>
 <body>
 <h1>News</h1>
