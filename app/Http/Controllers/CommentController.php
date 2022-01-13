@@ -22,7 +22,7 @@ class CommentController extends Controller
      */
     public function index(Post $post)
     {
-        return $post->comments()->ordered()->paginate(self::PAGE_SIZE);
+        return $post->comments()->with('user')->paginate(self::PAGE_SIZE);
     }
 
     /**
@@ -33,14 +33,11 @@ class CommentController extends Controller
      */
     public function store(Post $post): JsonResponse
     {
-        $validator = Validator::make(request()->all(), [
-            'title' => 'required|max:100',
-            'text' => 'required|max:2000']);
+        $validator = Validator::make(request()->all(), ['text' => 'required|max:2000']);
         if ($validator->fails()) return response()->json($validator->errors()->all(), 422);
 
         $validated = $validator->validated();
         $comment = new Comment();
-        $comment->title = $validated['title'];
         $comment->text = $validated['text'];
         $comment->user_id = User::inRandomOrder()->first()->id;
         $comment->post_id = $post->id;
