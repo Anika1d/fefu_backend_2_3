@@ -21,6 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'login',
         'password',
     ];
 
@@ -53,4 +54,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    static public $registrationRules = [
+        'password' => 'required|between:10,30|regex:/^(?=(.*[A-Z]){1})(?=(.*[a-z]){1})(?=(.*[0-9]){1})(?=(.*[re@#$%^!&+=.\-_*]){1})([a-zA-Z0-9@#$%^!&+=*.\-_])*$/',
+        'login' => 'required|between:5,30|unique:users,login',
+        'email' => 'required|unique:users,email',
+        'name' => 'required'
+    ];
+
+    static public $loginRules = [
+        'password' => 'required|max:10,30',
+        'login' => 'required|max:30',
+    ];
+
 }

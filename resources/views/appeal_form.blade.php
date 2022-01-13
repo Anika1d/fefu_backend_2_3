@@ -19,6 +19,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        @include('auth_h')
     </head>
     <body>
     <h2>Appeal</h2>
