@@ -66,13 +66,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, Post $post, Comment $comment): JsonResponse
     {
-        $validator = Validator::make(request()->all(), [
-            'title' => 'sometimes|required|max:100',
-            'text' => 'sometimes|required|max:2000']);
+        $validator = Validator::make(request()->all(), ['text' => 'required|max:2000']);
         if ($validator->fails()) return response()->json($validator->errors()->all(), 422);
 
         $validated = $validator->validated();
-        if (isset($validated['title'])) $comment->title = $validated['title'];
         if (isset($validated['text'])) $comment->text = $validated['text'];
         $comment->save();
 
