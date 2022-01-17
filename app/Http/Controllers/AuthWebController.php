@@ -23,7 +23,7 @@ class AuthWebController
                     return redirect(route('web_profile'));
             }
             return view('login_form',
-                ['errors' => $validator->fails() ? $validator->messages() : new MessageBag(['Login failed'])]);
+                ['errors' => $validator->messages()]);
         } else {
             return view('login_form');
         }
@@ -64,8 +64,6 @@ class AuthWebController
     public function profile(Request $request)
     {
         $user = Auth::user();
-        if ($user === null)
-            return redirect(route('web_login'));
         return view('profile', ['userData' => (new UserResource($user))->toArray($request)]);
     }
 }

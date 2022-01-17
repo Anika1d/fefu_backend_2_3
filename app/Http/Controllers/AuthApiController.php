@@ -18,7 +18,7 @@ class AuthApiController
         $input['login'] = strtolower($input['login']);
         $validator = Validator::make($input, User::$registrationRules);
         if ($validator->fails()) {
-            return response()->json(['message' => $validator->messages()->all()], 403);
+            return response()->json(['message' => $validator->messages()->all()], 422);
         } else {
             $user = new User;
             $user->name = $input['name'];
@@ -50,14 +50,12 @@ class AuthApiController
     public function profile(Request $request): JsonResponse
     {
         $user = Auth::user();
-        return $user !== null ? response()->json(['user' => new UserResource($user)]) : response()->json(['message' => 'Auth failed'], 401);
+        return response()->json(['user' => new UserResource($user)]);
     }
 
     public function logout(Request $request): JsonResponse
     {
         $user = Auth::user();
-        if ($user !== null)
-            $user->tokens()->delete();
         return $user !== null ? response()->json(['message' => 'Successfully logged out']) : response()->json(['message' => 'Auth failed'], 401);
     }
 }
