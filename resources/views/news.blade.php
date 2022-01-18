@@ -19,7 +19,9 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
+
     @includeWhen(session('popup'),'popup')
+    @include('auth_h')
 
 </head>
 

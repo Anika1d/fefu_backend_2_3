@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthApiController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
@@ -25,3 +26,10 @@ Route::apiResource('posts', PostController::class)->scoped(['post' => 'slug'])->
 Route::apiResource('posts.comments', CommentController::class)->scoped(['post' => 'slug', 'comment' => 'id'])->missing(function () {
     return response()->json(['message' => 'Post or comment not found'], 404);
 });
+
+Route::prefix('auth')->group(function () {
+    Route::get('/login', [AuthApiController::class, 'login']);
+    Route::get('/register', [AuthApiController::class, 'register']);
+    Route::get('/logout', [AuthApiController::class, 'logout'])->middleware('auth:sanctum');
+});
+Route::get('/profile', [AuthApiController::class, 'profile'])->middleware('auth:sanctum');
