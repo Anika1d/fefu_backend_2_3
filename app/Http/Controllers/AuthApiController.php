@@ -56,6 +56,7 @@ class AuthApiController
     public function logout(Request $request): JsonResponse
     {
         $user = Auth::user();
-        return $user !== null ? response()->json(['message' => 'Successfully logged out']) : response()->json(['message' => 'Auth failed'], 401);
+        $user->tokens()->delete();
+        return  response()->json(['message' => 'Successfully logged out']);
     }
 }
